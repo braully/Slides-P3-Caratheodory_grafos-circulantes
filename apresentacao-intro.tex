@@ -1,0 +1,542 @@
+\section{Motivação}
+\begin{frame}{Modelo de propagação}
+      O processo de influência pode ser modelado pelo contexto:
+
+      \begin{itemize}
+            \tightlist
+            \item
+                  Alguns indivíduos estão inicialmente influenciados;
+            \item
+                  Os demais indivíduos são influenciados à medida que seus vizinhos
+                  também ficam influenciados.
+            \item
+                  Novos indivíduos influenciados podem propagar a influência a outros
+                  indivíduos.
+      \end{itemize}
+      % \begin{figure}
+      % \centering
+      % \includegraphics[scale=0.2]{wa.png}
+      % \end{figure}
+\end{frame}
+
+\begin{frame}{Problemas relacionados}
+      \begin{itemize}
+            \tightlist
+            \item
+                  Propagação de informações em redes sociais
+            \item
+                  Disseminação de notícias falsas
+            \item
+                  Marketing viral
+            \item
+                  Infecção e doenças contagiosas
+
+      \end{itemize}
+\end{frame}
+
+\section{Preliminares}
+\begin{frame}{Notações}
+      \begin{columns}[T]
+            \begin{column}{.7\textwidth}
+                  \emph{Grafo simples}: \(G = (V(G)), E(G))\)
+
+                  \emph{Notações}:
+                  \begin{itemize}
+                        \tightlist
+                        \item \(N(v)=\{u \in V(G)|vu \in E(G)\}\)
+                        \item \(d(v)=|N(v)|\)
+                  \end{itemize}
+
+                  \vspace{0.5cm}
+                  \uncover<2->{Exemplo: $v=5$}
+                  \begin{itemize}
+                        \item<3-> $N(v)=\{1,3\}$
+                        \item<3-> $d(v)=2$
+                  \end{itemize}
+            \end{column}
+            \begin{column}{.3\textwidth}
+                  % \input{img/exemplo-grafo-simples.tikz}
+                  \begin{tikzpicture}
+                        \begin{pgfonlayer}{nodelayer}
+                              \node [style=empty] (0) at (-1, 1) {1};
+                              \node [style=empty] (1) at (1, 1) {2};
+                              \node [style=empty] (2) at (-1, -1) {4};
+                              \node [style=empty] (3) at (1, -1) {3};
+                              \node [style=empty] (4) at (0, 0) {5};
+                              %Cores
+                              \node [style=cvermelho,visible on=<2->] () at (0, 0) {5};
+                              \node [style=cazul,visible on=<3->] () at (-1, 1) {1};
+                              \node [style=cazul,visible on=<3->] () at (1, -1) {3};
+
+                        \end{pgfonlayer}
+                        \begin{pgfonlayer}{edgelayer}
+                              \draw (0) to (2);
+                              \draw (2) to (3);
+                              \draw (3) to (1);
+                              \draw (1) to (0);
+                              \draw (0) to (4);
+                              \draw (4) to (3);
+                              \draw[visible on=<3->,red] (0) to (4);
+                              \draw[visible on=<3->,red] (4) to (3);
+                        \end{pgfonlayer}
+                  \end{tikzpicture}
+
+            \end{column}
+      \end{columns}
+
+      %[] colcoar uma figura geral, e 
+\end{frame}
+
+
+\begin{frame}{Convexidade em Grafos}
+      A \textit{convexidade} em um grafo $G$ é dada por uma coleção ${\cal C}$ de subconjuntos de $V(G)$ tal que:
+      \begin{itemize}
+            \item$\emptyset,V(G) \in {\cal C}$
+            \item ${\cal C}$ é um conjunto fechado em relação a operação de intersecção
+            \item Cada elemento de ${\cal C}$ é um \textit{conjunto convexo}
+      \end{itemize}
+\end{frame}
+
+\begin{frame}{Convexidade $P_3$}
+      Convexidades definidas por um conjunto ${\cal P}$ de caminhos em grafos.
+      
+      \vspace{0.5cm}
+      \textit{Convexidade $P_3$} é quando ${\cal P}$ é o conjunto de todos os caminhos com três vértices.
+
+\end{frame}
+
+\begin{frame}{Convexidade $P_3$}
+
+      %[ ] Observação: Colocar uma figura com um conjunto não convexo, e um overlay para um conjunto convexo.
+      \begin{columns}[T]
+            \begin{column}{0.5\textwidth}
+                  % \input{img/exemplo-convexidade.tikz}
+                  \begin{tikzpicture}
+                        \begin{pgfonlayer}{nodelayer}
+                              \node [style=empty] (0) at (-3, 0) {a};
+                              \node [style=empty] (1) at (-2, 1) {b};
+                              \node [style=empty] (2) at (-2, -1) {i};
+                              \node [style=empty] (3) at (0, 1) {d};
+                              \node [style=empty] (4) at (2, 1) {e};
+                              \node [style=empty] (5) at (0, -1) {g};
+                              \node [style=empty] (6) at (2, -1) {f};
+                              \node [style=empty] (7) at (-1, 2) {c};
+                              \node [style=empty] (8) at (-1, -2) {h};
+                              %convexo
+                              % b, c, d
+                              \node [style=cazul,visible on=<{2,2}>] () at (-2, 1) {b};
+                              \node [style=cazul,visible on=<{2,2}>] () at (-1, 2) {c};
+                              \node [style=cazul,visible on=<{2,2}>] () at (0, 1) {d};
+                              % b, d, g
+                              \node [style=cvermelho,visible on=<3->] () at (-2, 1) {b};
+                              \node [style=cvermelho,visible on=<3->] () at (0, 1) {d};
+                              \node [style=cvermelho,visible on=<3->] () at (0, -1) {g};
+                        \end{pgfonlayer}
+                        \begin{pgfonlayer}{edgelayer}
+                              \draw (0) to (1);
+                              \draw (1) to (2);
+                              \draw (0) to (2);
+                              \draw (1) to (7);
+                              \draw (7) to (3);
+                              \draw (1) to (3);
+                              \draw (3) to (4);
+                              \draw (4) to (6);
+                              \draw (6) to (5);
+                              \draw (5) to (2);
+                              \draw (2) to (8);
+                              \draw (8) to (5);
+                              \draw (3) to (5);
+                        \end{pgfonlayer}
+                  \end{tikzpicture}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                  Seja $G=(V,E)$ um grafo, um conjunto $S$ é convexo na convexidade $P_3$ quando todo vértice em $V\setminus S$  tem no máximo um vizinho em $S$.
+
+                  \begin{itemize}
+                        \item<{2,3}> $S_1=\{b,c,d\}$ é convexo
+                        \item<{3,3}>  $S_2=\{b,d,g\}$ não é convexo
+                  \end{itemize}
+            \end{column}
+      \end{columns}
+\end{frame}
+
+\begin{frame}{Convexidade $P_3$}
+      \begin{columns}[T]
+            \begin{column}{0.5\textwidth}
+                  % \input{img/exemplo-convexidade.tikz}
+                  \begin{tikzpicture}
+                        \begin{pgfonlayer}{nodelayer}
+                              \node [style=empty] (0) at (-3, 0) {a};
+                              \node [style=empty] (1) at (-2, 1) {b};
+                              \node [style=empty] (2) at (-2, -1) {i};
+                              \node [style=empty] (3) at (0, 1) {d};
+                              \node [style=empty] (4) at (2, 1) {e};
+                              \node [style=empty] (5) at (0, -1) {g};
+                              \node [style=empty] (6) at (2, -1) {f};
+                              \node [style=empty] (7) at (-1, 2) {c};
+                              \node [style=empty] (8) at (-1, -2) {h};
+                              %não convexo
+                              % b, d, g
+                              \node [style=cvermelho] () at (-2, -1) {i};
+                              \node [style=cvermelho] () at (0, -1) {g};
+                              \node [style=cazul,visible on=<2->] () at (-1, -2) {h};
+
+                        \end{pgfonlayer}
+                        \begin{pgfonlayer}{edgelayer}
+                              \draw (0) to (1);
+                              \draw (1) to (2);
+                              \draw (0) to (2);
+                              \draw (1) to (7);
+                              \draw (7) to (3);
+                              \draw (1) to (3);
+                              \draw (3) to (4);
+                              \draw (4) to (6);
+                              \draw (6) to (5);
+                              \draw (5) to (2);
+                              \draw (2) to (8);
+                              \draw (8) to (5);
+                              \draw (3) to (5);
+                        \end{pgfonlayer}
+                  \end{tikzpicture}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                  \emph{Intervalo fechado}: para $u,v \in V(G)$ é o conjunto $I[u, v]$ de todos os vértices pertencentes a todo caminho $P_3$ entre $u$ e $v$.
+                  %[ ] Fazer o overlay para o u e v e o intervalo fechado de u e v.
+                  % [ ] Mesma figura fazer o intervalo fechado de um conjunto S
+
+                  \begin{itemize}
+                        \item<{2,3}> $I[i,g]=\{i,g,h\}$
+                        \item<{3,3}> Se $S \subseteq V(G)$, então $I[S]$ é a união de todos $I[u, v]$ para $u, v \in S$.
+                  \end{itemize}
+            \end{column}
+      \end{columns}
+\end{frame}
+
+
+\begin{frame}{Envoltória e percolação}
+      \begin{columns}[T]
+            \begin{column}{0.5\textwidth}
+                  % \input{img/exemplo-convexidade.tikz}
+                  \begin{tikzpicture}
+                        \begin{pgfonlayer}{nodelayer}
+                              \node [style=empty] (0) at (-3, 0) {a};
+                              \node [style=empty] (1) at (-2, 1) {b};
+                              \node [style=empty] (2) at (-2, -1) {i};
+                              \node [style=empty] (3) at (0, 1) {d};
+                              \node [style=empty] (4) at (2, 1) {e};
+                              \node [style=empty] (5) at (0, -1) {g};
+                              \node [style=empty] (6) at (2, -1) {f};
+                              \node [style=empty] (7) at (-1, 2) {c};
+                              \node [style=empty] (8) at (-1, -2) {h};
+                              %convexo
+                              % b, c, d
+                              \node [style=cvermelho,visible on=<2->] () at (-2, 1) {b};
+                              \node [style=cvermelho,visible on=<2->] () at (0, 1) {d};
+                              \node [style=cvermelho,visible on=<2->] () at (0, -1) {g};
+                              %i1
+                              \node [style=cazul,visible on=<3->] () at (-1, 2) {c};
+                              \node [style=cazul,visible on=<3->] () at (-2, -1) {i};
+                              %i2
+                              \node [style=cazul,visible on=<4->] () at (-3, 0) {a};
+                              \node [style=cazul,visible on=<4->] () at (-1, -2) {h};
+
+
+
+                        \end{pgfonlayer}
+                        \begin{pgfonlayer}{edgelayer}
+                              \draw (0) to (1);
+                              \draw (1) to (2);
+                              \draw (0) to (2);
+                              \draw (1) to (7);
+                              \draw (7) to (3);
+                              \draw (1) to (3);
+                              \draw (3) to (4);
+                              \draw (4) to (6);
+                              \draw (6) to (5);
+                              \draw (5) to (2);
+                              \draw (2) to (8);
+                              \draw (8) to (5);
+                              \draw (3) to (5);
+                        \end{pgfonlayer}
+                  \end{tikzpicture}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                  \emph{Envoltória convexa}: $H(S) = I^{k}[S]$ tal que $I^k[S] = I^{k-1}[S]$ para $k \geq 2$.
+
+                  
+                  \emph{Percolação}: O processo de computar a envoltória convexa de um conjunto não convexo.
+
+                  \begin{itemize}
+                        \item<2-> $S=\{b,d,g\}$
+                        \item<3-> $I^1[S]=S \cup \{c,i\}$.
+                        \item<4-> $I^2[S]=I^1[S] \cup \{a,h\}$.
+                        \item<5-> $I^3[S]=I^2[S]$.
+                        \item<5-> $H(S)=I^3[S]=I^2[S]$.
+
+                  \end{itemize}
+            \end{column}
+      \end{columns}
+\end{frame}
+
+
+\begin{frame}{Conjunto de Carathéodory}
+      \begin{columns}[T]
+            \begin{column}{0.4\textwidth}
+                  % \input{img/exemplo-carat.tikz}
+                  \begin{tikzpicture}
+                        \begin{pgfonlayer}{nodelayer}
+                              \node [style=empty] (0) at (-1.75, 1.75) {4};
+                              \node [style=empty] (1) at (-1.75, 0.75) {5};
+                              \node [style=empty] (2) at (-0.75, 1.5) {3};
+                              \node [style=empty] (3) at (0.5, 1.25) {2};
+                              \node [style=empty] (4) at (1.75, 1.5) {1};
+                              \node [style=empty] (5) at (0.25, 0.25) {6};
+                              \node [style=empty] (6) at (1.5, -0.5) {8};
+                              \node [style=empty] (7) at (-0.5, -0.5) {7};
+                              \node [style=empty] (8) at (-1.5, -1) {9};
+                              \node [style=empty] (9) at (-0.75, -1.5) {0};
+                              %S=1,4,5,8,9,0
+                              \node [style=ccinza] () at (1.75, 1.5) {1};
+                              \node [style=ccinza] () at (-1.75, 1.75) {4};
+                              \node [style=ccinza] () at (-1.75, 0.75) {5};
+                              \node [style=ccinza] () at (1.5, -0.5) {8};
+                              \node [style=ccinza] () at (-1.5, -1) {9};
+                              \node [style=ccinza] () at (-0.75, -1.5) {0};
+                              % 3,2,6,7
+                              \node [style=cazul,visible on=<{2,2}>] () at (-0.75, 1.5) {3};
+                              \node [style=cazul,visible on=<{2,2}>] () at (0.5, 1.25) {2};
+                              \node [style=cazul,visible on=<{2,2}>] () at (0.25, 0.25) {6};
+                              \node [style=cazul,visible on=<{2,2}>] () at (-0.5, -0.5) {7};
+                              %v=7
+                              \node [style=cazul,visible on=<{3,3}>] () at (-0.5, -0.5) {7};
+                              %v=3
+                              \node [style=cazul,visible on=<{4,4}>] () at (-0.75, 1.5) {3};
+                              %v=6
+                              \node [style=cazul,visible on=<{5,5}>] () at (0.25, 0.25) {6};
+                              %v=2
+                              \node [style=cazul,visible on=<{6,6}>] () at (0.5, 1.25) {2};
+                              
+
+                        \end{pgfonlayer}
+                        \begin{pgfonlayer}{edgelayer}
+                              \draw (1) to (2);
+                              \draw (0) to (2);
+                              \draw (2) to (3);
+                              \draw (3) to (4);
+                              \draw (3) to (5);
+                              \draw (5) to (6);
+                              \draw (5) to (7);
+                              \draw (7) to (8);
+                              \draw (7) to (9);
+                        \end{pgfonlayer}
+                  \end{tikzpicture}
+
+                  Qual o minimo do $|S|$ tal que $v\in H(S)$, para todo $v\in H(S) \setminus S$.
+            \end{column}
+            \begin{column}{0.6\textwidth}
+                  \begin{itemize}
+                        \item<2-> $H(S)=V(G)$
+                        \item<3-> Se $v=7$, então $v\in H(\{9,0\})$
+                        \item<4-> Se $v=3$, então $v\in H(\{4,5\})$
+                        \item<5-> Se $v=6$, então $v\in H(\{8,9,0\})$
+                        \item<6-> Se $v=2$, então $v\in H(\{1,4,5\})$
+                        \item<7-> Então, $c_s(G)=3$
+                        \item<8-> Para calcular o $c(G)$, é necessário calcular o $c_s(G)$ para todo $S \subseteq V(G)$ e pegar o maior valor.
+                  \end{itemize}
+            \end{column}
+      \end{columns}
+\end{frame}
+
+\begin{frame}
+      \frametitle{Nº de Carathéodory}
+
+
+      \begin{itemize}
+      \item{O \textit{número de Carathéodory} $c(G)$ é o menor inteiro $c$,
+                        para o qual todo $u \in H(S)$, existe um conjunto $F \subseteq  S$,
+                        com $|F| \le c$ e $u \in H(F)$}
+                        
+            \item{Se $\partial H(S)=H(S) \setminus \bigcup _{u \in S} H(S \setminus \{u\})$,
+                        é não vazio, então $S$ é um \textit{conjunto de Carathéodory}}
+            
+            \item{Esta definição permite uma  forma alternativa,
+                        o número de Carathéodory é a maior cardinalidade de um conjunto de Carathéodory}
+      \end{itemize}
+\end{frame}
+
+% \begin{frame}{Caratheódory}
+%       \begin{columns}[T]
+%             \begin{column}{0.5\textwidth}
+%                   \input{img/exemplo-carat-2.tikz}
+%             \end{column}
+%             \begin{column}{0.5\textwidth}
+%                   \begin{itemize}
+%                         \item H
+%                   \end{itemize}
+%             \end{column}
+%       \end{columns}
+% \end{frame}
+
+
+\begin{frame}{Grafos circulantes}
+      \textbf{Definição:} Os grafos circulantes $C_n(L)$ são grafos circulares com $n$ vértices e lista de inteiros $L$, tal que $C_n(L)$ tem vértices $V(C_n(L))=\{1,2,...,n\}$ e arestas $st\in E(C_n(L))| (s+t) \bmod n \in L$
+
+      \vspace{0.5cm}
+
+\end{frame}
+
+\begin{frame}{Exemplo de grafos circulantes}
+\textbf{Construção simplificada:} Para cada $j\in L$ o $i$-ésimo vértice é adjacente ao ($i+j$)-ésimo e ao ($i-j$)-ésimo vértice.
+\vspace{0.3cm}
+
+ \centering
+      \resizebox{\textwidth}{!}{%
+            \begin{tikzpicture}
+                  \begin{pgfonlayer}{nodelayer}
+                        \node [style=empty, label={$v_1$}] (0) at (3.5, 2) {};
+                        \node [style=empty, label={below:$v_4$}] (1) at (3.5, -2) {};
+                        \node [style=empty, label={below:$v_3$}] (2) at (5.5, -1) {};
+                        \node [style=empty, label={$v_2$}] (3) at (5.5, 1) {};
+                        \node [style=empty, label={$v_6$}] (4) at (1.5, 1) {};
+                        \node [style=empty, label={below:$v_5$}] (5) at (1.5, -1) {};
+                        % 
+                        \node [style=empty, label={$v_1$}] (14) at (-3.5, 2) {};
+                        \node [style=empty, label={$v_2$}] (15) at (-1.5, 1) {};
+                        \node [style=empty, label={below:$v_3$}] (16) at (-1.5, -1) {};
+                        \node [style=empty, label={below:$v_4$}] (17) at (-3.5, -2) {};
+                        \node [style=empty, label={below:$v_5$}] (18) at (-5.5, -1) {};
+                        \node [style=empty, label={$v_6$}] (19) at (-5.5, 1) {};
+
+                        % Labels G1
+                        \node [style=none,visible on=<{1,1}>] (20) at (-3.5, -4) {$C_6(2)$};
+                        \node [style=none,visible on=<{2,2}>] (20) at (-3.5, -4) {$C_6(\textbf{2})=\{v_1v_3,v_2v_4,v_4v_6,v_6v_2\}$};
+                        \node [style=none,visible on=<{3,4}>] (20) at (-3.5, -4) {$C_6(2)$};
+
+                        % Labels G2
+                        \node [style=none,visible on=<{1,1}>] (21) at (3.5, -4) {$C_6(1,2)$};
+                        \node [style=none,visible on=<{2,2}>] (21) at (3.5, -4) {$C_6(\textbf{1},2)=\{v_1v_2,v_3v_4,v_5v_6,v_6v_1\}$};
+                        \node [style=none,visible on=<{3,3}>] (21) at (3.5, -4) {$C_6(1,\textbf{2})=\{v_1v_2,v_3v_4,v_5v_6,v_6v_1,v_1v_3,v_2v_4,v_4v_6,v_6v_2\}$};
+                        \node [style=none,visible on=<{4,4}>] (21) at (3.5, -4) {$C_6(1,2)$};
+                  \end{pgfonlayer}
+                  \begin{pgfonlayer}{edgelayer}
+                        %Ciclo C6(1)
+                        \draw[visible on=<2->]  (0) to (3){};
+                        \draw[visible on=<2->] (3) to (2);
+                        \draw[visible on=<2->] (2) to (1);
+                        \draw[visible on=<2->] (1) to (5);
+                        \draw[visible on=<2->] (5) to (4);
+                        \draw[visible on=<2->] (4) to (0);
+
+                        % Finalização C6(1,2)
+                        \draw[visible on=<3->] (0) to (2);
+                        \draw[visible on=<3->] (3) to (1);
+                        \draw[visible on=<3->] (2) to (5);
+                        \draw[visible on=<3->] (1) to (4);
+                        \draw[visible on=<3->] (5) to (0);
+                        \draw[visible on=<3->] (4) to (3);
+
+                        % Pentagrama C6(2)
+                        \draw[visible on=<2->] (14) to (16);
+                        \draw[visible on=<2->] (18) to (16);
+                        \draw[visible on=<2->] (18) to (14);
+                        \draw[visible on=<2->] (17) to (15);
+                        \draw[visible on=<2->] (19) to (15);
+                        \draw[visible on=<2->] (19) to (17);
+                  \end{pgfonlayer}
+            \end{tikzpicture}
+      }
+\end{frame}
+
+
+
+\begin{frame}{Trabalhos Relacionados}
+\begin{itemize}
+    \item NP-difícil: Determinar se um grafo $G$ tem um conjunto Carathéodory de tamanho $k$ [Barbosa et al. (2012)].
+    \item Algoritmo de tempo polinomial para árvores, co-grafos [Barbosa et al. (2012)] e cordais [Coelho et al. (2014)]
+    \item Limite superior para número envoltória de grafos circulantes [Shaheen et al.(2022)].
+\end{itemize}
+\end{frame}
+
+
+
+
+% \begin{frame}{Propriedades Caratheódory}
+%       Barbosa et al. (2012) apresentam algumas propriedades de conjuntos de Carathéodory em grafos.
+%       \begin{proposition}
+%             Seja $G$ um grafo e $S$ um conjunto de Carathéodory de $G$.
+%             \begin{enumerate}
+%                   \def\labelenumi{\Alph{enumi}.}
+%                   \item{
+%                               Se $G$ tem ordem de pelo menos 2 e é completo ou um caminho ou um ciclo, então $c(G)=2$.
+%                         }
+%                   \item{
+%                               Se $S$ tem ordem pelo menos dois, então todo vértice de $u$ em $S$ está em um caminho $uvw$ de ordem 3 tal que $v\in V(G) \backslash H_G(S\backslash \{u\})$ e $w \in H_G(S\backslash \{u\})$
+%                         }
+%                   \item{
+%                               Nenhum subconjunto próprio $S'$ de $S$ satisfaz  $H_G(S')=V(G)$.
+%                         }
+%                   \item{
+%                               O fecho convexo $H_G(S)$ de $S$ induz um subgrafo conexo de $G$.
+%                         }
+%             \end{enumerate}
+%       \end{proposition}
+% \end{frame}
+
+
+\begin{frame}{Propriedades envoltória circulante}
+      Shaheen et al. (2022) apresentam algumas propriedades de grafos circulantes que podem concluir a seguinte proposição.
+      \begin{proposition}
+            \label{prop-circulante-p3}
+            Seja $G$ um grafo circulante $C_n(1,r)$ e $S$ um conjunto de vértices tal que $S=\{v_i,v_{i+1},v_{i+2},...,v_{i+(r-1)}\}$, então $S$ é um conjunto envoltório.
+      \end{proposition}
+\end{frame}
+
+\begin{frame}{Exemplo Proposição \ref{prop-circulante-p3}}
+      \centering
+      \begin{tikzpicture}
+            \begin{pgfonlayer}{nodelayer}
+                  \node [style=basic, label={$v_1$}] (8) at (0.75, 2) {};
+                  \node [style=basic, label={$v_2$}] (9) at (2, 0.75) {};
+                  \node [style=basic, label={below:$v_3$}] (13) at (2, -0.75) {};
+                  \node [style=empty, label={below:$v_4$}] (10) at (0.75, -2) {};
+                  \node [style=empty, label={below:$v_5$}] (12) at (-0.75, -2) {};
+                  \node [style=empty, label={below:$v_6$}] (11) at (-2, -0.75) {};
+                  \node [style=empty, label={$v_7$}] (6) at (-2, 0.75) {};
+                  \node [style=empty, label={$v_8$}] (7) at (-0.75, 2) {};
+
+                  % I1
+                  \node [style=camarelo, visible on=<2->] () at (-0.75, 2) {};
+                  \node [style=cazul, visible on=<2->] () at (0.75, -2) {};
+                  % I2
+                  \node [style=cazul, visible on=<3->] () at (-0.75, -2) {};
+                  \node [style=camarelo, visible on=<3->] () at (-2, 0.75) {};
+                  % I3
+                  \node [style=cverde, visible on=<2->] () at (-2, -0.75) {};
+                  % Label
+                  \node [style=none, visible on=<{1,1}>] () at (0, -3) {$C_8(1,3)$ e $S=\{v_1,v_2,v_3\}$};
+                  \node [style=none, visible on=<{2,2}>] () at (0, -3) {$I^1[S]=I[S]\cup \{v_4,v_6,v_8\} $};
+                  \node [style=none, visible on=<{3,3}>] () at (0, -3) {$I^2[S]=I^1[S] \cup \{v_5,v_7\}$};
+                  \node [style=none, visible on=<{4,4}>] () at (0, -3) {$I^3[S]=I^2[S]=H(S)$};
+                  % \node [style=none, visible on=<{5,5}>] () at (0, -3) {$I^3[S]=I^2[S]=H(S)$};
+            \end{pgfonlayer}
+            \begin{pgfonlayer}{edgelayer}
+                  \draw (8) to (9);
+                  \draw (9) to (13);
+                  \draw (13) to (10);
+                  \draw (10) to (12);
+                  \draw (12) to (11);
+                  \draw (11) to (6);
+                  \draw (6) to (7);
+                  \draw (7) to (8);
+                  \draw (8) to (10);
+                  \draw (9) to (12);
+                  \draw (13) to (11);
+                  \draw (10) to (6);
+                  \draw (12) to (7);
+                  \draw (11) to (8);
+                  \draw (6) to (9);
+                  \draw (7) to (13);
+            \end{pgfonlayer}
+      \end{tikzpicture}
+
+\end{frame}

@@ -1,0 +1,59 @@
+   \begin{tikzpicture}
+        \begin{pgfonlayer}{nodelayer}
+            \node [style=empty, label=$1$] (17) at (-0.895914, 4.77063) {};
+            \node [style=empty, label=above right:$2$] (1) at (0.189066, 4.35267) {};
+            \node [style=empty, label=right:$3$] (0) at (1.06777, 3.59788) {};
+            \node [style=empty, label=right:$4$] (2) at (1.63005, 2.58449) {};
+            \node [style=empty, label=right:$5$] (16) at (1.81177, 1.44497) {};
+            \node [style=empty, label=right:$6$] (15) at (1.60082, 0.304384) {};
+            \node [style=empty, label=below right:$7$] (12) at (1.01036, -0.687785) {};
+            \node [style=empty, label=below right:$8$] (11) at (0.113692, -1.4267) {};
+            \node [style=empty, label=below:$9$] (8) at (-0.982794, -1.80467) {};
+            \node [style=empty, label=below:$10$] (6) at (-2.1349, -1.79608) {};
+            \node [style=empty, label=below left:$11$] (4) at (-3.22193, -1.3879) {};
+            \node [style=empty, label=below left:$12$] (3) at (-4.10196, -0.626988) {};
+            \node [style=empty, label=left:$13$] (5) at (-4.67736, 0.381953) {};
+            \node [style=empty, label=left:$14$] (7) at (-4.85714, 1.52817) {};
+            \node [style=empty, label=left:$15$] (9) at (-4.63285, 2.66353) {};
+            \node [style=empty, label=left:$16$] (10) at (-4.04341, 3.65672) {};
+            \node [style=empty, label=above left:$17$] (13) at (-3.15118, 4.39467) {};
+            \node [style=empty, label=$18$] (14) at (-2.05853, 4.78571) {};
+        \end{pgfonlayer}
+        \begin{pgfonlayer}{edgelayer}
+            \draw (17) to (1);
+            \draw (1) to (0);
+            \draw (0) to (2);
+            \draw (2) to (16);
+            \draw (16) to (15);
+            \draw (15) to (12);
+            \draw (12) to (11);
+            \draw (11) to (8);
+            \draw (8) to (6);
+            \draw (6) to (4);
+            \draw (4) to (3);
+            \draw (3) to (5);
+            \draw (5) to (7);
+            \draw (7) to (9);
+            \draw (9) to (10);
+            \draw (10) to (13);
+            \draw (13) to (14);
+            \draw (14) to (17);
+            \draw (17) to (15);
+            \draw (1) to (12);
+            \draw (0) to (11);
+            \draw (2) to (8);
+            \draw (16) to (6);
+            \draw (15) to (4);
+            \draw (12) to (3);
+            \draw (11) to (5);
+            \draw (8) to (7);
+            \draw (6) to (9);
+            \draw (4) to (10);
+            \draw (3) to (13);
+            \draw (5) to (14);
+            \draw (7) to (17);
+            \draw (9) to (1);
+            \draw (10) to (0);
+            \draw (13) to (2);
+        \end{pgfonlayer}
+    \end{tikzpicture} 

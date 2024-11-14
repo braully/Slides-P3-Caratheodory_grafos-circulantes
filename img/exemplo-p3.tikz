@@ -1,0 +1,66 @@
+\begin{tikzpicture}[scale=0.8]
+        \begin{pgfonlayer}{nodelayer}
+            \node [style=empty,label=$v_1$] (0) at (0, 2) {};
+            \node [style=empty,label=below:$v_4$] (1) at (0, -2) {};
+            \node [style=empty,label=below:$v_3$] (2) at (2, -1) {};
+            \node [style=empty,label=$v_2$] (3) at (2, 1) {};
+            \node [style=empty,label=$v_6$] (4) at (-2, 1) {};
+            \node [style=empty,label=below:$v_5$] (5) at (-2, -1) {};
+            \node [style=empty,label=$v_7$] (6) at (4, 0.75) {};
+            \node [style=empty,label=$v_8$] (7) at (5.25, 2) {};
+            % # Grafo C(6,{1,2})
+            \node [style=empty,label=$v_1$] (8) at (6.75, 2) {};
+            \node [style=empty,label=$v_2$] (9) at (8, 0.75) {};
+            \node [style=empty,label=below:$v_4$] (10) at (6.75, -2) {};
+            \node [style=empty,label=below:$v_6$] (11) at (4, -0.75) {};
+            \node [style=empty,label=below:$v_5$] (12) at (5.25, -2) {};
+            \node [style=empty,label=below:$v_3$] (13) at (8, -0.75) {};
+            % Grafo C(6,{2})
+            \node [style=empty,label=$v_1$] (14) at (-7, 2) {};
+            \node [style=empty,label=$v_2$] (15) at (-5, 1) {};
+            \node [style=empty,label=below:$v_3$] (16) at (-5, -1) {};
+            \node [style=empty,label=below:$v_4$] (17) at (-7, -2) {};
+            \node [style=empty,label=below:$v_5$] (18) at (-9, -1) {};
+            \node [style=empty,label=$v_6$] (19) at (-9, 1) {};
+            \node [style=none] (20) at (-7, -4) {C(6,\{2\})};
+            \node [style=none] (21) at (0, -4) {C(6,\{1,2\})};
+            \node [style=none] (22) at (6, -4) {C(8,\{1,3\})};
+        \end{pgfonlayer}
+        \begin{pgfonlayer}{edgelayer}
+            \draw (0) to (3);
+            \draw (3) to (2);
+            \draw (2) to (1);
+            \draw (1) to (5);
+            \draw (5) to (4);
+            \draw (4) to (0);
+            \draw (0) to (2);
+            \draw (3) to (1);
+            \draw (2) to (5);
+            \draw (1) to (4);
+            \draw (5) to (0);
+            \draw (4) to (3);
+            \draw (14) to (16);
+            \draw (18) to (16);
+            \draw (18) to (14);
+            \draw (17) to (15);
+            \draw (19) to (15);
+            \draw (19) to (17);
+
+            \draw (8) to (9);
+            \draw (9) to (13);
+            \draw (13) to (10);
+            \draw (10) to (12);
+            \draw (12) to (11);
+            \draw (11) to (6);
+            \draw (6) to (7);
+            \draw (7) to (8);
+            \draw (8) to (10);
+            \draw (9) to (12);
+            \draw (13) to (11);
+            \draw (10) to (6);
+            \draw (12) to (7);
+            \draw (11) to (8);
+            \draw (6) to (9);
+            \draw (7) to (13);
+        \end{pgfonlayer}
+    \end{tikzpicture}

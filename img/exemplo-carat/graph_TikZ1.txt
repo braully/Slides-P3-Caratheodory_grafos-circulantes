@@ -1,0 +1,37 @@
+\begin{tikzpicture}[main_node/.style={circle,draw,minimum size=1em,inner sep=3pt]}]
+
+\node[main_node] (0) at (0.6329572621117494, 4.785714285714286) {1};
+\node[main_node] (1) at (-4.857142857142858, 4.744634867487058) {2};
+\node[main_node] (2) at (-3.833502868953156, 3.5157937960127175) {3};
+\node[main_node] (3) at (-0.5322240754102641, 3.573360824457781) {4};
+\node[main_node] (4) at (0.5901906606444669, 0.21624293057835509) {5};
+\node[main_node] (5) at (-0.5537582873962705, 2.2755934834959235) {6};
+\node[main_node] (6) at (-4.849467351934984, 0.11486401310786709) {7};
+\node[main_node] (7) at (-3.797551453187092, 2.224437600944044) {8};
+\node[main_node] (8) at (-2.0039567158615847, 4.774716055384488) {9};
+\node[main_node] (9) at (-2.041422523731579, 2.305167711900795) {10};
+\node[main_node] (10) at (-1.9801234939601062, 0.1815344330228621) {11};
+
+ \path[draw, thick]
+(0) edge node {} (3) 
+(0) edge node {} (4) 
+(0) edge node {} (8) 
+(1) edge node {} (2) 
+(1) edge node {} (6) 
+(1) edge node {} (8) 
+(2) edge node {} (7) 
+(2) edge node {} (8) 
+(3) edge node {} (8) 
+(3) edge node {} (9) 
+(4) edge node {} (5) 
+(4) edge node {} (10) 
+(5) edge node {} (9) 
+(5) edge node {} (10) 
+(6) edge node {} (9) 
+(6) edge node {} (10) 
+(7) edge node {} (9) 
+(7) edge node {} (10) 
+(9) edge node {} (10) 
+;
+
+\end{tikzpicture}

@@ -1,0 +1,55 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=basic, label={$v_r$}] (0) at (-4, 1.25) {};
+		\node [style=basic, label={$v_{r-1}$}] (1) at (-3, 1.25) {};
+		\node [style=empty, label={$v_{r-2}$}] (2) at (-2, 1.25) {};
+		\node [style=basic, label={$v_{r-3}$}] (3) at (-1, 1.25) {};
+		\node [style=basic, label={$v_{r-4}$}] (4) at (0, 1.25) {};
+		\node [style=empty, label={$v_3$}] (14) at (3, 1.25) {};
+		\node [style=basic, label={$v_2$}] (10) at (4, 1.25) {};
+		\node [style=basic, label={$v_1$}] (13) at (5, 1.25) {};
+		\node [style=empty, label={below:$v_n$}] (5) at (-4, 0) {};
+		\node [style=empty, label={below:$v_{n-1}$}] (6) at (-3, 0) {};
+		\node [style=empty, label={below:$v_{n-2}$}] (7) at (-2, 0) {};
+		\node [style=empty, label={below:$v_{n-3}$}] (8) at (-1, 0) {};
+		\node [style=empty, label={below:$v_{n-4}$}] (9) at (0, 0) {};
+		\node [style=empty, label={above left:$v_{n-(r-3)}$}] (15) at (3, 0) {};
+		\node [style=empty, label={below:$v_{n-(r-2)}$}] (11) at (4, 0) {};
+		\node [style=empty, label={right:$v_{n-(r-1)}$}] (12) at (5, 0) {};
+		\node [style=basic, label={$v_{r-4}$}] (16) at (1, 1.25) {r5};
+		\node [style=empty, label={below:$v_{n-4}$}] (17) at (1, 0) {n5};
+		\node [style=basic, label={$v_{r-4}$}] (18) at (2, 1.25) {r6};
+		\node [style=empty, label={below:$v_{n-4}$}] (19) at (2, 0) {n6};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0) to (5);
+		\draw (1) to (6);
+		\draw (2) to (7);
+		\draw (3) to (8);
+		\draw (4) to (9);
+		\draw (0) to (1);
+		\draw (1) to (2);
+		\draw (2) to (3);
+		\draw (3) to (4);
+		\draw (5) to (6);
+		\draw (6) to (7);
+		\draw (7) to (8);
+		\draw (8) to (9);
+		\draw (10) to (13);
+		\draw (13) to (12);
+		\draw (12) to (11);
+		\draw (10) to (11);
+		\draw (13) to (5);
+		\draw (14) to (10);
+		\draw (15) to (11);
+		\draw (14) to (15);
+		\draw (16) to (17);
+		\draw (18) to (19);
+		\draw (4) to (16);
+		\draw (16) to (18);
+		\draw [in=180, out=15] (18) to (14);
+		\draw (9) to (17);
+		\draw (17) to (19);
+		\draw [bend right=15] (19) to (15);
+	\end{pgfonlayer}
+\end{tikzpicture}

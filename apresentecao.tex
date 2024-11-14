@@ -1,0 +1,172 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+% \usepackage{mathabx}
+\usepackage{mathpazo}
+% \usepackage{eulervm}
+% \usepackage{natbib}
+\usepackage{multicol}
+\usepackage{multirow}
+
+%========================
+\usepackage{colortbl}
+\usepackage{tikz}
+\usepackage{tikzit}
+\usepackage{graphicx}% http://ctan.org/pkg/graphicx
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+\usetikzlibrary{plotmarks}
+\usepackage{tikzsymbols}
+\tikzstyle{basic}=[fill=black, draw=black, shape=circle]
+\tikzstyle{empty}=[draw=black, shape=circle]
+
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{bibliography item}{}
+% \newtheorem{definition}{Definição}
+\newtheorem{observation}{Observação}
+\newtheorem{properties}{Propriedades}
+\newtheorem{corolary}{Corolário}
+\newtheorem{conjecture}{Conjectura}
+% \newtheorem{theorem}{Teorema}
+\newtheorem{proposition}{Proposição}
+% \newtheorem{lemma}{Lema}
+% \newtheorem{fact}{Fato}
+% \setbeamertemplate{lemmas}[numbered]
+\newtheorem{lema}{Lema}
+\newtheorem{teo}{Teorema}
+\newtheorem{fato}{Fato}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Estilo para grafos
+\pgfplotsset{compat=1.9}
+\usetikzlibrary{plotmarks,arrows,shapes,backgrounds,calc,positioning,matrix}
+\tikzstyle{basic}=[fill=black, draw=black, shape=circle,minimum size=1em,inner sep=0pt]
+\tikzstyle{ccinza}=[fill=black!50, draw=black, shape=circle,minimum size=1em,inner sep=0pt]
+\tikzstyle{contaminado}=[fill=black!95, draw=black, shape=circle,minimum size=1em,inner sep=0pt]
+\tikzstyle{empty}=[draw=black, shape=circle,minimum size=1em,inner sep=0pt]
+\tikzstyle{cvermelho}=[fill=red, draw=black, shape=circle,minimum size=1em,inner sep=0pt]
+\tikzstyle{cverde}=[fill=green, draw=black, shape=circle,minimum size=1em,inner sep=0pt]
+\tikzstyle{camarelo}=[fill=yellow, draw=black, shape=circle,minimum size=1em,inner sep=0pt]
+\tikzstyle{cazul}=[fill=blue, draw=black, shape=circle,minimum size=1em,inner sep=0pt]
+
+\tikzset{
+  invisible/.style={opacity=0},
+  visible on/.style={alt={#1{}{invisible}}},
+  alt/.code args={<#1>#2#3}{%
+    \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+  },
+}
+
+
+
+\usetheme{Dresden}
+\usefonttheme{serif}
+\usecolortheme{rose}
+
+
+\title{Número de $P_3$-Carathéodory em Grafos Circulantes}
+\author{Braully Rocha da Silva, Erika Morais Martins Coelho, {\bf Hebert Coelho da Silva}}
+\institute{Universidade Federal de Goiás \par Instituto de Informática}
+
+% \usepackage[backend=biber,style=authoryear]{biblatex}
+% \bibliography{artigo-p3-hull-circulant}
+% \addbibresource{artigo-p3-hull-circulant.bib}
+
+% \titlegraphic{
+% \includegraphics[width=3.5cm]{img/logo-ppgc.png}
+% \vspace*{0.5cm}
+% }
+
+\begin{document}
+
+% \maketitle
+\begin{frame}
+  \titlepage
+  \centering
+  \includegraphics[width=3.5cm]{img/logo-ppgc.png}
+\end{frame}
+
+%[ ] Logo INF e UFG
+\begin{frame}{Roteiro}
+  \begin{itemize}
+    \item Motivação
+    \item Preliminares
+    \item Resultados
+    \item Conclusão e trabalhos futuros
+  \end{itemize}
+\end{frame}
+
+\input{apresentacao-intro}
+\input{apresentacao-resultado}
+% \input{apresentacao-conclusao}
+
+
+
+
+% \begin{frame}[allowframebreaks]{Referências}
+% % \bibliographystyle{plain}
+% % \bibliography{artigo-p3-hull-circulant}
+% \printbibliography
+% \end{frame}
+\section{Conclusão e trabalhos futuros}
+\begin{frame}{Conclusão}
+  % $NP-$difícil determinar se um grafo possui um conjunto de Carathéodory de tamanho $k$ [Barbosa et al., 2012], determinamos um limite inferior para o número de Carathéodory em grafos circulantes na convexidade $P_3$:
+  \begin{itemize}
+    \item Para grafos circulantes $C_n(1,2)$ o número de Carathéodory é 2.
+    \item Para grafos circulantes $C_n(1,r)$ com $r>2$ e $n\ge4r-2$:
+          \begin{itemize}
+            \item $c(C_n(1,r)) \ge \lfloor \frac{2r+1}{3} \rfloor$ se $3 \nmid (r+1)$
+            \item $c(C_n(1,r)) \ge \frac{2(r+1)}{3} $ caso contrário.
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Trabalhos Futuros}
+  \begin{itemize}
+    \item Determinar limite superior para o número de Carathéodory em grafos circulantes na convexidade $P_3$.
+    \item Estender os resultados para outros tipos de grafos de Cayley: Hipercubos, Hamming e Kneser.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Referências}
+          \begin{itemize}
+            \item{Barbosa et al. (2012): \textbf{On
+                              the Carathéodory Number for the Convexity of Paths of Order Three}. SIAM Journal on Discrete
+                        Mathematics, 26(3):929–939. ISSN 0895-4801.}
+            \item{Coelho et al. (2014)}: \textbf{The Carathéodory number of the convexity of chordal graphs}. Discrete Applied Mathematics, vol. 172, 2014 p.104--108.
+
+            \item{Shaheen et al.(2022): \textbf{Irreversible k -Threshold Conversion Number of
+                              Circulant Graphs}. Journal of Applied Mathematics, 2022(1):1250951. ISSN 16870042.}
+      \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Fim}
+
+  Dúvidas e sugestões?
+
+  \begin{center}
+    \Huge Obrigado!
+    % [ ] Logo CNPQ, UFG e INF
+    \begin{columns}[T]
+      \begin{column}{0.5\textwidth}
+        \vspace*{1cm}
+        \resizebox{\textwidth}{!}{
+          \includegraphics{img/logo-cnpq.png}
+        }
+      \end{column}
+      \begin{column}{0.5\textwidth}
+        \resizebox{\textwidth}{!}{
+          \includegraphics{img/logo-ppgc.png}
+        }
+      \end{column}
+    \end{columns}
+  \end{center}
+
+
+\end{frame}
+\end{document}

@@ -1,0 +1,71 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=empty] (0) at (-6.25, 5) {1*};
+		\node [style=empty] (1) at (-5.25, 5) {2};
+		\node [style=empty] (2) at (-4, 5) {3};
+		\node [style=empty] (3) at (-3, 5) {4*};
+		\node [style=empty] (4) at (-2, 5) {5*};
+		\node [style=empty] (5) at (1.5, 5) {r-2*};
+		\node [style=empty] (6) at (2.5, 5) {r-1*};
+		\node [style=empty] (7) at (3.5, 5) {r*};
+		\node [style=empty] (8) at (4.75, 5) {r+1*};
+		\node [style=empty] (9) at (-1, 5) {6*};
+		\node [style=empty] (10) at (4.75, 3) {n*};
+		\node [style=empty] (11) at (3.5, 3) {n-1*};
+		\node [style=empty] (12) at (2.5, 3) {n-2*};
+		\node [style=empty] (13) at (1.5, 3) {n-3*};
+		\node [style=empty] (14) at (-1, 3) {n-(r-5)};
+		\node [style=empty] (15) at (-2, 3) {n-(r-4)*};
+		\node [style=empty] (16) at (-3, 3) {n-(r-3)*};
+		\node [style=empty] (17) at (-4, 3) {n-(r-2)};
+		\node [style=empty] (19) at (3.5, 7) {2r};
+		\node [style=empty] (20) at (2.5, 7) {2r-1};
+		\node [style=empty] (21) at (1.5, 7) {2r-2};
+		\node [style=empty] (22) at (-1, 7) {vr+6};
+		\node [style=empty] (23) at (-2, 7) {vr+5};
+		\node [style=empty] (24) at (-3, 7) {vr+4};
+		\node [style=empty] (25) at (-4, 7) {vr+3};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0) to (1);
+		\draw (1) to (2);
+		\draw (2) to (3);
+		\draw (3) to (4);
+		\draw (4) to (9);
+		\draw [bend left=15] (9) to (5);
+		\draw (5) to (6);
+		\draw (6) to (7);
+		\draw (7) to (8);
+		\draw (8) to (10);
+		\draw (10) to (11);
+		\draw (11) to (12);
+		\draw (12) to (13);
+		\draw [bend left=15] (13) to (14);
+		\draw (14) to (15);
+		\draw (15) to (16);
+		\draw [in=360, out=180] (16) to (17);
+		\draw (11) to (7);
+		\draw (12) to (6);
+		\draw (13) to (5);
+		\draw (14) to (9);
+		\draw (15) to (4);
+		\draw (16) to (3);
+		\draw (17) to (2);
+		\draw (7) to (19);
+		\draw (6) to (20);
+		\draw (5) to (21);
+		\draw (9) to (22);
+		\draw (4) to (23);
+		\draw (3) to (24);
+		\draw (2) to (25);
+		\draw (25) to (24);
+		\draw (24) to (23);
+		\draw (23) to (22);
+		\draw [bend left=15] (22) to (21);
+		\draw (21) to (20);
+		\draw (20) to (19);
+		\draw [bend left=90, looseness=1.75] (0) to (8);
+		\draw [bend right=75, looseness=1.25] (0) to (10);
+		\draw [bend left=90, looseness=2.00] (17) to (19);
+	\end{pgfonlayer}
+\end{tikzpicture}

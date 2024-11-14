@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=empty] (0) at (-3, -1) {e};
+		\node [style=empty] (1) at (-1, -1) {f};
+		\node [style=empty] (2) at (1, -1) {g};
+		\node [style=empty] (3) at (3, -1) {h};
+		\node [style=empty] (4) at (3, 1) {d};
+		\node [style=empty] (5) at (1, 1) {c};
+		\node [style=empty] (6) at (-1, 1) {b};
+		\node [style=empty] (7) at (-3, 1) {a};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (4) to (3);
+		\draw (3) to (2);
+		\draw (5) to (2);
+		\draw (2) to (1);
+		\draw (1) to (0);
+		\draw (1) to (6);
+		\draw (0) to (7);
+		\draw (7) to (6);
+	\end{pgfonlayer}
+\end{tikzpicture}

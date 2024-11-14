@@ -1,0 +1,161 @@
+\section{Resultados}
+\begin{frame}{Para um grafo circulante $C_n(1,2)$}
+    \begin{fato}
+        \label{fact-carat}
+        Seja $G$ um grafo e $S$ um conjunto de Carathéodory de $G$, então $S$ possui pelo menos dois vértices $u$ e $v$ tal que $w\in N(u)\cap N(v)$, onde $w \in V(G)$.
+    \end{fato}
+
+    \begin{lema}
+        \label{lemma-circ-1-2}
+        Seja $G = C_n(1,2)$, então $c(G)=2$.
+    \end{lema}
+
+    \begin{proposition}
+        Seja $C_n^k$ um grafo potência de ciclo, então $c(C_n^k) = 2$.
+    \end{proposition}
+\end{frame}
+
+% \begin{frame}{Para $C_n(1,r)$ tal que $3 | (r+1)$}
+
+% \end{frame}
+
+
+\begin{frame}{}
+    \begin{lema}
+        \label{lemma-circ-1-r}
+        Considere o grafo $G = C_n(1,r)$ tal que $3 | (r+1)$ e $S \subseteq V(G)$. Se $S = \{v_i \;|\; 3 \nmid i$ para $1\le i \le r\}$ então $v_{2r} \in H(S)$.
+    \end{lema}
+    
+    \begin{columns}[T]
+        \begin{column}{0.7\textwidth}
+            \resizebox{\textwidth}{!}{
+                \input{img/escada-lemma-circ-1-r2-apres.tex}
+            }
+
+
+
+        \end{column}
+        \begin{column}{0.3\textwidth}
+            \begin{itemize}
+                \item<2-> $\{ v_i \; | \; 3 \mid i \} \in I^1[S]$.
+                \item<3-> $v_{r+2} \in I^2[S]$.
+                \item<4-> $v_{r+3} \in I^3[S]$.
+                \item<5-> $\cdots$
+                \item<5-> $v_{2r} \in H(S)$.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% \begin{frame}{Para $C_n(1,r)$ tal que $3 | (r+1)$}
+
+% \end{frame}
+
+
+\begin{frame}{}
+    \begin{lema}
+        \label{lemma-carat-1-rx3}
+        Seja $G = C_n(1,r)$ tal que $3 | (r+1)$ e $S = \{v_i \in V(G) \;|\; 3 \nmid i$ para $1\le i \le r\}$. Se $n \ge 4r - 2$ então $ v_{2r} \in  \partial H(S)$.
+    \end{lema}
+    
+    \begin{columns}
+        \begin{column}{0.7\textwidth}
+            \resizebox{\textwidth}{!}{
+                \input{img/escada-lemma-circ-1-r2-apres}
+            }
+            \resizebox{\textwidth}{!}{
+                \input{img/escada-lemma-circ-1-r-reverso2-apres}
+            }
+            % Para:
+            % \begin{itemize}
+            %     \tightlist
+            %     \item $C_n(1,r)$ com $3 | (r+1)$ e $n \ge 4\times r - 2$
+            %     \item $S = \{v_i \in V(G) \;|\; 3 \nmid i$ para $1\le i \le r\}$.
+            % \end{itemize}
+        \end{column}
+        \begin{column}{0.3\textwidth}
+            % Quando $n \ge 4\times r - 2$ e $S = \{v_i \in V(G) \;|\; 3 \nmid i$ para $1\le i \le r\}$ temos:
+            \footnotesize
+            \begin{itemize}
+                \tightlist
+                \item<2-> $I^1[S]=S\cup \{ v_i \; | \; 3 \mid i \} \cup \{v_{r+1}, v_n \}$
+                \item<3-> $I^2[S]=I^1[S]\cup\{v_{r+2}, v_{n-1}\}$
+                \item<4-> $I^3[S]=I^2[S]\cup\{v_{r+3}, v_{n-2}\}$
+                \item<5-> $I^{r}[S]=I^{r-1}[S]\cup\{v_{2r}, v_{n-(r-1)}\}$
+                % \item<6-> $v_{2r} \in H(S)$ e $v_{2r} \not\in H(S-j)|\forall j\in S$
+                % \item<7-> Logo $v_{2r} \in \partial H(S)$
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+\begin{frame}{Para $G=C_n(1,r)$ tal que $3 | (r+1)$}
+    \begin{teo}
+        \label{theorem-carat-1-rx3}
+        Seja $G = C_n(1,r)$ tal que $3 | (r+1)$ e $n \ge 4\times r - 2$ então $c(G) \ge \frac{2(r+1)}{3}$.%então $G$ possui um conjunto de Carathéodory de cardinalidade $ \frac{2(r+1)}{3} $. % \rceil \frac{2r}{3} \lceil$
+    \end{teo}
+    % \begin{proof}
+    %     O conjunto $S = \{v_i \;|\; 3 \nmid i$ para $1\le i \le r\}$ pelo Lema~\ref{lemma-circ-1-r} temos que $v_{2r} \in H(S)$, e pelo Lema~\ref{lemma-carat-1-rx3} temos que $v_{2r} \in \partial H(S)$, portanto $S$ é um conjunto de Carathéodory de $G$. O conjunto $S$ tem cardinalidade $\frac{2(r+1)}{3}$ consequentemente o número de Carathéodory de $G$ é maior ou igual $\frac{2(r+1)}{3} $.  %$r - \lfloor \frac{r}{3} \rfloor = \rceil \frac{2r}{3} \lceil$.
+    % \end{proof}
+\end{frame}
+
+
+\begin{frame}{Exemplo}
+    \begin{figure}
+        \centering
+        \resizebox{\textwidth}{!}{
+            \centering
+            \input{img/c18-pt1-final}
+        }
+        \caption{Exemplo de um conjunto de Carathéodory para $C_{18}(1,5)$}
+        \label{fig-c18-pt1}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{Exemplo}
+    \begin{figure}
+        \centering
+        \resizebox{\textwidth}{!}{
+            \centering
+            \input{img/c18-pt2-final}
+        }
+        \caption{Exemplo de um conjunto de Carathéodory para $C_{18}(1,5)$}
+        \label{fig-c18-pt2}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{Para $C_n(1,r)$ tal que $3\nmid(r+1)$}
+    De forma análoga vamos concluir um limite inferior para o número de Carathéodory para $C_n(1,r)$, onde $r+1$ não é múltiplo de 3.
+\end{frame}
+
+% \begin{frame}{Para $C_n(1,r)$ tal que $3\nmid(r+1)$}
+%     \begin{figure}
+%     % \resizebox{\textwidth}{!}{
+%         \centering
+%         \input{img/exemplo-quando-pndv3}
+%     % }
+%     \caption{Exemplos de $S$ para quando $3\nmid (r+1)$ 
+%     %conforme Lema\ref{lemma-carat-1-r-geral}
+%     }
+%     \label{fig-exemplo-lema-geral}
+% \end{figure}
+% \end{frame}
+
+\begin{frame}{Para $C_n(1,r)$ tal que $3\nmid(r+1)$}
+\begin{lema}
+        \label{lemma-carat-1-r-geral}
+        Seja $G=C_n(1,r)$ tal que $3\nmid(r+1)$ e $S\subseteq V(G)$. Se $S=\{v_r\}\cup \{ v_i | 3 \nmid i $ tal que $1\le i  < r-1 \}$ então $v_{2r} \in H(S)$.
+    \end{lema}
+    \begin{lema}
+        \label{lemma-carat-1-rx3-geral}
+        Seja $G = C_n(1,r)$ tal que $3 \nmid (r+1)$ e $S=\{ v_i | 3 \nmid i $ tal que $1\le i  < r-1 \}\cup \{v_r\}$  . Se $n \ge 4r - 2$ então $ v_{2r} \in  \partial H(S)$.
+    \end{lema}
+
+    \begin{teo}
+        \label{theorem-carat-1-r-geral}
+        Seja $G = C_n(1,r)$ tal que $3 \nmid (r+1)$ e $n \ge 4\times r - 2$  então $c(G) \ge \lfloor \frac{2r+1}{3} \rfloor$. %$G$ possui um conjunto de Carathéodory de cardinalidade $\lfloor \frac{2r+1}{3} \rfloor$. %$\frac{2r+1}{3}$.
+    \end{teo}
+\end{frame}
